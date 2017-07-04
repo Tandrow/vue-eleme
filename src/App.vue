@@ -38,7 +38,7 @@
         this.$http.get('/api/seller').then((res) => {
           res = res.body
           if (res.errno === ERR_OK) {
-            this.sell = res.seller
+            this.seller = Object.assign({}, this.seller, res.data)
           }
         })
       }
@@ -53,6 +53,8 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "common/stylus/mixin.styl"
   #app
+    padding: 0
+    margin: 0
     .tab
       display: flex
       height: 40px
