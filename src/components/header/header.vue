@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
@@ -34,7 +34,9 @@
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
-          <div class="star-wrapper"></div>
+          <div class="star-wrapper">
+            <star v-bind:size="48" v-bind:score="5"></star>
+          </div>
           <div class="title">
             <div class="line"></div>
             <div class="text">优惠信息</div>
@@ -52,19 +54,19 @@
             <div class="line"></div>
           </div>
           <div class="bulletin">
-            <p class="content">{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
+            <p class="content">{{seller.bulletin}}</p>
           </div>
         </div>
       </div>
-      <div class="detail-close">
+      <div class="detail-close" @click="closeDetail">
         <i class="icon-close"></i>
       </div>
     </div>
-
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import star from 'components/star/star'
   export default{
     props: {
       seller: {
@@ -79,10 +81,16 @@
     methods: {
       showDetail() {
         this.detailShow = true
+      },
+      closeDetail() {
+        this.detailShow = false
       }
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+    },
+    components: {
+      star
     }
   }
 </script>
@@ -224,6 +232,10 @@
           color: rgb(255, 255, 255)
           line-height: 16px
           text-align: center
+        .star-wrapper
+          margin-top: 18px
+          text-align: center
+          padding: 2px 0
         .title
           display: flex
           width: 80%
